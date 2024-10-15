@@ -38,6 +38,18 @@ services:
       - ME_CONFIG_MONGODB_ADMINPASSWORD=secret
       - ME_CONFIG_MONGODB_SERVER=mongodb
     networks:
-       - profile-network
+         - profile-network
+    volumes:    # NEW
+          - mongo-data:/data/db
+          
+       
     depends_on:
       - mongodb
+
+
+volumes:
+  mongo-data:
+    name: 'my-data-vol'
+    driver: local
+
+      
