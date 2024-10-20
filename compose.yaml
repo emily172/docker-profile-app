@@ -12,12 +12,12 @@ services:
       - 3000:3000
     environment:
       - MONGO_PASS=secret
-      - MONGO_HOST=database # UPDATED
+      - MONGO_HOST=database
     networks:
       - profile-network
     depends_on:
-      - database # UPDATED
-  database: # UPDATED
+      - database
+  database:
     container_name: mongoDB
     image: mongo:8.0-rc
     environment:
@@ -26,7 +26,7 @@ services:
     networks:
       - profile-network
     volumes:
-      - mongo-data:/data/db
+      - profiledata:/data/db # UPDATED
   mongo-express:
     container_name: express
     image: mongo-express:1.0-20-alpine3.19
@@ -36,12 +36,10 @@ services:
     environment:
       - ME_CONFIG_MONGODB_ADMINUSERNAME=admin
       - ME_CONFIG_MONGODB_ADMINPASSWORD=secret
-      - ME_CONFIG_MONGODB_SERVER=database # UPDATED
+      - ME_CONFIG_MONGODB_SERVER=database
     networks: 
       - profile-network
     depends_on:
-      - database # UPDATED
-volumes: 
-  mongo-data: 
-    name: 'my-data-vol'
-    driver: local
+      - database
+volumes:
+  profiledata: # NEW
